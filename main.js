@@ -3,7 +3,7 @@ const textInput = searchInput.querySelector('.wrapper__text')
 const autocomLists = searchInput.querySelector('.wrapper__autocom-lists')
 const container = document.querySelector('.container')
 
-const debouncedGetRepo = debounce(getRepo, 500);
+const debouncedGetRepo = debounce(getRepo, 900);
 
 textInput.onkeyup = (e) => {
   let userData = e.target.value.trim();
@@ -12,6 +12,7 @@ textInput.onkeyup = (e) => {
   } else {
     autocomLists.classList.remove('active');
     autocomLists.innerHTML = '';
+    autocomLists.style.display = 'none';
   }
 };
 
@@ -30,12 +31,12 @@ function getRepo(userData) {
       });
 
       showResult(listItems);
-     
+
 
       let allList = autocomLists.querySelectorAll('li');
       createCard(allList, allItems);
       autocomLists.classList.add('active')
-      
+
     }
     ).catch(error => {
       console.error('Ошибка:', error);
@@ -64,7 +65,7 @@ function debounce(func, delay) {
 }
 
 function cardTemplate({ name, owner, stars }) {
-  container.insertAdjacentHTML("beforeEnd", 
+  container.insertAdjacentHTML("beforeEnd",
     `<div class="container__card">
     <div class="container__table">
       <div>Name: ${name}</div>
@@ -73,7 +74,7 @@ function cardTemplate({ name, owner, stars }) {
     </div>
     <button class="container__delete-card">&#10006</button>
   </div>`
-);
+  );
 }
 
 function createCard(lists, items) {
@@ -84,7 +85,7 @@ function createCard(lists, items) {
         owner: items[index].owner.login,
         stars: items[index].stargazers_count
       });
-    
+
       textInput.value = '';
       autocomLists.classList.remove('active');
       autocomLists.style.display = 'none';
