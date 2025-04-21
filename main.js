@@ -3,12 +3,19 @@ const textInput = searchInput.querySelector('.wrapper__text')
 const autocomLists = searchInput.querySelector('.wrapper__autocom-lists')
 const container = document.querySelector('.container')
 
-const debouncedGetRepo = debounce(getRepo, 900);
+const debouncedGetRepo = debounce(getRepo, 1500);
+
+let timeoutId;
 
 textInput.onkeyup = (e) => {
+  clearTimeout(timeoutId);
+
   let userData = e.target.value.trim();
-  if (userData) {
-    debouncedGetRepo(userData);
+  if (userData.length > 0) {
+
+    timeoutId = setTimeout(() => {
+      debouncedGetRepo(userData);
+    }, 300);
   } else {
     autocomLists.classList.remove('active');
     autocomLists.innerHTML = '';
