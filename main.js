@@ -3,17 +3,19 @@ const textInput = searchInput.querySelector('.wrapper__text')
 const autocomLists = searchInput.querySelector('.wrapper__autocom-lists')
 const container = document.querySelector('.container')
 
-const debouncedGetRepo = debounce(getRepo, 900);
+const debouncedGetRepo = debounce(getRepo, 1500);
+
+let timeoutId;
 
 textInput.onkeyup = (e) => {
-  clearTimeout(timeoutId);
+  clearTimeout(timeoutId); // Очищаем предыдущий таймер
 
   let userData = e.target.value.trim();
   if (userData.length > 0) {
-
+    // Устанавливаем новый таймер
     timeoutId = setTimeout(() => {
       debouncedGetRepo(userData);
-    }, 300);
+    }, 300); // Задержка перед вызовом функции
   } else {
     autocomLists.classList.remove('active');
     autocomLists.innerHTML = '';
