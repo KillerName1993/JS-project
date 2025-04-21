@@ -3,7 +3,7 @@ const textInput = searchInput.querySelector('.wrapper__text')
 const autocomLists = searchInput.querySelector('.wrapper__autocom-lists')
 const container = document.querySelector('.container')
 
-const debouncedGetRepo = debounce(getRepo, 1500);
+const debouncedGetRepo = debounce(getRepo, 5000);
 
 textInput.onkeyup = (e) => {
   let userData = e.target.value.trim();
