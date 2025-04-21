@@ -5,7 +5,9 @@ const container = document.querySelector('.container')
 
 const debouncedGetRepo = debounce(getRepo, 1500);
 
+
 let timeoutId;
+
 
 textInput.onkeyup = (e) => {
   clearTimeout(timeoutId); // Очищаем предыдущий таймер
